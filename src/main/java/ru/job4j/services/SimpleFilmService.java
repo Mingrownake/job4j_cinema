@@ -3,16 +3,12 @@ package ru.job4j.services;
 import org.springframework.stereotype.Service;
 import ru.job4j.dto.FilmDTO;
 import ru.job4j.models.Film;
-import ru.job4j.models.Genre;
-import ru.job4j.repository.FileRepository;
 import ru.job4j.repository.FilmRepository;
 import ru.job4j.repository.GenreRepository;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class SimpleFilmService implements FilmService {
@@ -36,8 +32,10 @@ public class SimpleFilmService implements FilmService {
         var genres = sql2oGenreRepository.findAll();
         return films.stream().flatMap(film ->
                 genres.stream().filter(genre -> film.getGenreId() == genre.getId())
-                        .map(genre -> new FilmDTO(film.getId(), film.getName(), film.getDescription(), film.getYear(),
-                                genre.getName(), film.getMinimalAge(), film.getDurationInMinutes()))).collect(Collectors.toList());
+                        .map(genre -> new FilmDTO(film.getName(), film.getDescription(), film.getYear(),
+                                genre.getName(), film.getFileId(), film.getMinimalAge(), film.getDurationInMinutes()))
+                        .peek(filmDTO -> filmDTO.setId(film.getId())))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -46,8 +44,8 @@ public class SimpleFilmService implements FilmService {
     }
 
     @Override
-    public Optional<Film> save(Film film) {
-        return Optional.empty();
+    public Film save(Film film) {
+        return null;
     }
 
     @Override

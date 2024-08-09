@@ -9,6 +9,7 @@ public class FilmDTO {
     private String description;
     private int year;
     private String genre;
+    private int fileId;
     private int minimalAge;
     private int durationInMinutes;
 
@@ -16,12 +17,13 @@ public class FilmDTO {
 
     }
 
-    public FilmDTO(int id, String name, String description, int year, String genre, int minimalAge, int durationInMinutes) {
-        this.id = id;
+    public FilmDTO(String name, String description, int year, String genre, int fileId,
+                   int minimalAge, int durationInMinutes) {
         this.name = name;
         this.description = description;
         this.year = year;
         this.genre = genre;
+        this.fileId = fileId;
         this.minimalAge = minimalAge;
         this.durationInMinutes = durationInMinutes;
     }
@@ -82,20 +84,11 @@ public class FilmDTO {
         this.durationInMinutes = durationInMinutes;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        FilmDTO filmDTO = (FilmDTO) o;
-        return id == filmDTO.id;
+    public int getFileId() {
+        return fileId;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
+    public void setFileId(int fileId) {
+        this.fileId = fileId;
     }
 }
