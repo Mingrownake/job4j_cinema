@@ -1,9 +1,20 @@
 package ru.job4j.models;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Objects;
 
 public class FilmSession {
+
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+      "id", "id",
+      "film_id", "filmId",
+      "halls_id",   "hallsId",
+      "start_time", "startDateTime",
+            "end_time", "endDateTime",
+            "price", "price"
+    );
+
     private int id;
     private int filmId;
     private int hallsId;

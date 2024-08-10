@@ -8,6 +8,29 @@
 </head>
 <body class="d-flex flex-column h-100">
 <header th:insert="blocks/header :: header"></header>
+<main>
+    <div class="container mt-5">
+        <div class="mb-3" th:each="filmSession : ${filmSessions}">
+            <div class="card text-center">
+                <div class="card-header">
+                    <span class="card-text">Зал: </span>
+                    <span class="card-text" th:text="${filmSession.hallName}"></span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${filmSession.filmName}"></h5>
+                    <span class="card-text" th:text="${filmSession.getFormattedStartDateTime}"></span> -
+                    <span class="card-text" th:text="${filmSession.getFormattedEndDateTime}"></span>
+                    <p class="mt-2"><a href="#" class="btn btn-primary">Купить</a></p>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    <span class="card-text">Стоимость: </span>
+                    <span class="card-text" th:text="${filmSession.price}"></span>
+                    <span class="card-text"> руб. </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 <footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>
