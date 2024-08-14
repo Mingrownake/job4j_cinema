@@ -6,14 +6,13 @@ import org.sql2o.Sql2o;
 import ru.job4j.models.Halls;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class Sql2o2HallsRepository implements HallsRepository {
+public class Sql2oHallsRepository implements HallsRepository {
     private final Sql2o sql2o;
 
-    public Sql2o2HallsRepository(Sql2o sql2o) {
+    public Sql2oHallsRepository(Sql2o sql2o) {
         this.sql2o = sql2o;
     }
 
@@ -27,6 +26,9 @@ public class Sql2o2HallsRepository implements HallsRepository {
 
     @Override
     public Optional<Halls> findById(int id) {
-        return Optional.empty();
+        try (Connection con = sql2o.open()) {
+            var query = con.createQuery("select * from halls where id = :id").addParameter("id", id);
+            return Optional.ofNullable(query.setColumnMappings(Halls.COLUMN_MAPPING).executeAndFetchFirst(Halls.class));
+        }
     }
 }

@@ -6,7 +6,6 @@ import org.sql2o.Sql2o;
 import ru.job4j.models.FilmSession;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -27,6 +26,12 @@ public class Sql2oFilmSessionRepository implements FilmSessionRepository {
 
     @Override
     public Optional<FilmSession> findById(int id) {
-        return Optional.empty();
+        try (Connection con = sql2o.open()) {
+            var sql = "select * from film_sessions where id = :id";
+            return Optional.ofNullable(con.createQuery(sql)
+                    .addParameter("id", id)
+                    .setColumnMappings(FilmSession.COLUMN_MAPPING)
+                    .executeAndFetchFirst(FilmSession.class));
+        }
     }
 }

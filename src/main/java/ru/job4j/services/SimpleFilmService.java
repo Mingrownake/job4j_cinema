@@ -23,7 +23,7 @@ public class SimpleFilmService implements FilmService {
 
     @Override
     public Optional<Film> findById(int id) {
-        return Optional.empty();
+        return sql2oFilmRepository.findById(id);
     }
 
     @Override

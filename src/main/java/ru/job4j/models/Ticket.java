@@ -1,5 +1,6 @@
 package ru.job4j.models;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class Ticket {
@@ -8,6 +9,14 @@ public class Ticket {
     private int rowNumber;
     private int placeNumber;
     private int userId;
+
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "session_id", "sessionId",
+            "row_number", "rowNumber",
+            "place_number", "placeNumber",
+            "user_id", "userId"
+    );
 
     public Ticket(int sessionId, int rowNumber, int placeNumber, int userId) {
         this.sessionId = sessionId;

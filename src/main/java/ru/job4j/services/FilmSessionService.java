@@ -1,13 +1,14 @@
 package ru.job4j.services;
 
 import ru.job4j.dto.FilmSessionDTO;
+import ru.job4j.models.FilmSession;
 
 import java.util.Collection;
 import java.util.Optional;
 
 public interface FilmSessionService {
 
-    public Collection<FilmSessionDTO> findAll();
+    Collection<FilmSessionDTO> findAll();
 
-    public Optional<FilmSessionDTO> findById(int id);
+    Optional<FilmSession> findById(int id);
 }

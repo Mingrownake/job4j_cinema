@@ -3,7 +3,6 @@ package ru.job4j.repository;
 import org.springframework.stereotype.Repository;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
-import ru.job4j.dto.FilmDTO;
 import ru.job4j.models.Film;
 
 import java.util.Collection;
@@ -19,7 +18,11 @@ public class Sql2oFilmRepository implements FilmRepository {
 
     @Override
     public Optional<Film> findById(int id) {
-        return Optional.empty();
+        try (Connection con = sql2o.open()) {
+            var query = con.createQuery("SELECT * FROM films WHERE id = :id")
+                    .addParameter("id", id);
+            return Optional.ofNullable(query.setColumnMappings(Film.COLUMN_MAPPING).executeAndFetchFirst(Film.class));
+        }
     }
 
     @Override

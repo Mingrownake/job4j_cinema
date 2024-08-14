@@ -1,5 +1,6 @@
 package ru.job4j.models;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class User {
@@ -7,6 +8,13 @@ public class User {
     private String name;
     private String email;
     private  String password;
+
+    public static final Map<String, String> COLUMN_MAPPING = Map.of(
+            "id", "id",
+            "full_name", "name",
+            "email", "email",
+            "password", "password"
+    );
 
     public User(String name, String email, String password) {
         this.name = name;

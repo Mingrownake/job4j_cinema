@@ -20,7 +20,7 @@
                     <h5 class="card-title" th:text="${filmSession.filmName}"></h5>
                     <span class="card-text" th:text="${filmSession.getFormattedStartDateTime}"></span> -
                     <span class="card-text" th:text="${filmSession.getFormattedEndDateTime}"></span>
-                    <p class="mt-2"><a href="#" class="btn btn-primary">Купить</a></p>
+                    <p class="mt-2"><a th:href="@{/schedule/{id}(id=${filmSession.getId})}" class="btn btn-primary">Купить</a></p>
                 </div>
                 <div class="card-footer text-body-secondary">
                     <span class="card-text">Стоимость: </span>

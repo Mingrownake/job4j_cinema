@@ -8,21 +8,31 @@
 </head>
 <body>
   <div th:fragment="header">
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
             <a class="navbar-brand" th:href="@{/index}">Job4jCinema</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="navbar-brand" th:href="@{/index}">Главаня</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" th:href="@{/schedule}">Расписание</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="navbar-brand" th:href="@{/library}">Кинотека</a>
-                    </li>
-                </ul>
+            <div class="collapse navbar-collapse justify-content-between">
+                <div class="navbar-nav mr-auto">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="navbar-brand" th:href="@{/index}">Главаня</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" th:href="@{/schedule}">Расписание</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" th:href="@{/library}">Кинотека</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex" th:if="${user.name == 'Гость' || user.name == null}">
+                    <a class="nav-link text-secondary me-3" th:href="@{/users/login}">Логин</a>
+                    <a class="nav-link text-secondary" th:href="@{/users/registration}">Регистрация</a>
+                </div>
+                <div class="d-flex" th:if="${user.name != 'Гость' && user.name != null && user.email != null}">
+                    <a class="nav-link text-secondary me-3" href="#" th:text="${user.name}"></a>
+                    <a class="nav-link text-secondary" th:href="@{/users/logout}">Выйти</a>
+                </div>
             </div>
         </div>
     </nav>
